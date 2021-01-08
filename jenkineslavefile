@@ -1,0 +1,32 @@
+pipeline {
+  agent none
+  stages {
+    stage ('build-1') {
+    agent any
+       steps {
+          sh '''
+                  echo "this is build-1 stage"
+                  sleep 2
+             '''
+             }
+    }
+    stage ('deploy-1') {
+    agent { label 'slave2' }
+       steps {
+          sh '''
+                  echo "this is deploy-1 stage"
+                  sleep 2
+             '''
+             }
+    }
+    stage ('test-1') {
+    agent any
+       steps {
+          sh '''
+                  echo "this is test-1 stage"
+                  sleep 2
+             '''
+             }
+    }
+  }
+}
